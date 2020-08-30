@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <header>
 
         <div id="highscore">
@@ -24,7 +25,6 @@
 
     <div class="container">
         <div id="welcome-page" class="welcome-page">
-
             <h1 class="welcome">The Javascript Coding Script</h1>
             <p>
                 Once you press the start button the quiz will begin
@@ -35,39 +35,53 @@
                 </br>
                 Good luck and have fun!
             </p>
-
-            <div id="end-page" class="end hide">
-                <h2>
-                    All Done!
-                </h2>
-
-                <p id="score"></p>
-
-                <p>
-                    Enter Initials:
-                    <input type="text" placeholder="Your initials" id="playerID" />
-
-                    <button id="register"> Submit </button>
-                </p>
-            </div>
-
-            <div id="question-container" class="hide">
-                <div id="question">
-                    Question
-                </div>
-
-                <div id="answer-buttons" class="buttons">
-                    <button id='btn1' class="btn">Answer 1</button>
-                    <button id='btn2' class="btn">Answer 2</button>
-                    <button id='btn3' class="btn">Answer 3</button>
-                    <button id='btn4' class="btn">Answer 4</button>
-                </div>
-            </div>
-
-            <div id="display" class="correct hide"></div>
-            <div id="display2" class="incorrect hide"></div>
-
         </div>
+
+        <div id="end-page" class="end hide">
+            <h2>
+                All Done!
+            </h2>
+
+            <p id="score"></p>
+
+            <p>
+                Enter Initials:
+                <input type="text" placeholder="Your initials" id="playerID" />
+
+                <button id="register"> Submit </button>
+            </p>
+        </div>
+
+        <div id="question-container" class="hide">
+            <div id="question">
+                Question
+            </div>
+
+            <div id="answer-buttons" class="buttons">
+                <button id='btn1' class="btn">Answer 1</button>
+                <button id='btn2' class="btn">Answer 2</button>
+                <button id='btn3' class="btn">Answer 3</button>
+                <button id='btn4' class="btn">Answer 4</button>
+            </div>
+        </div>
+
+        <div id="display" class="correct hide"></div>
+        <div id="display2" class="incorrect hide"></div>
+    </div>
+
+    <div id="new-container" class="hide" style="text-align:-webkit-center">
+        <h1>Highscores</h1>
+
+        </br>
+        </br>
+
+        <ol id="newScores"></ol>
+
+        </br>
+        </br>
+
+        <a href="index.html"><button>Go Back</button></a>
+        <button id="clear">Clear Highscores</button>
     </div>
 
     <div class="controls">

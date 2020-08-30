@@ -13,8 +13,8 @@
 }
 
 
-/* The portions of the header were styled to incorperate the timer 
-and high score block at the top of the page */
+/* This was implemented to have a div for the timer block and the view highscore block within the header div 
+thus giving a clean easy look to see their highscores and to watch the timer */
 
 header {
     display: flex;
@@ -26,19 +26,20 @@ header {
     top: 30px;
     right: 30px;
     position: absolute;
+    font-size: large;
 }
 
 #highscore {
     top: 30px;
     left: 30px;
     position: absolute;
+    font-size: large;
     background-color: var(--Background-color);
     color: var(--Primary-color)
 }
 
 
-/* New stylings for the containers for all of the welcoming page and the ending page
-were added so that they can be centered and evenly added in */
+/* This is for the welcome page div to give it a nice clean look as they enter the application */
 
 .welcome-page {
     display: flex;
@@ -56,6 +57,8 @@ were added so that they can be centered and evenly added in */
 }
 
 .container {
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -64,6 +67,11 @@ were added so that they can be centered and evenly added in */
 
 
 /* These are used to stylize and position all the buttons for the quiz */
+
+#question {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
 
 .buttons {
     justify-content: center;
@@ -76,15 +84,6 @@ were added so that they can be centered and evenly added in */
     color: var(--Primary-color);
     padding: 10px;
     margin: 5px 0 5px 0;
-}
-
-
-/* The controls box is placed at the bottom to hold the start button 
-and possibly any other buttons for the future */
-
-#question {
-    margin-bottom: 15px;
-    font-size: 24px;
 }
 
 .controls {
@@ -142,4 +141,28 @@ and possibly any other buttons for the future */
     border-bottom: 3px solid gray;
     background-color: red;
     font-family: 'Long Cang', cursive;
+}
+
+
+/* These are the styles used to center the final highscores and to have them into seperate boxes */
+
+.new-container {
+    margin: 200px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+ol {
+    background-color: var(--Background-color);
+    width: 300px;
+    padding-left: 0px;
+    max-height: 600px;
+    overflow: auto;
+}
+
+li {
+    color: var(--Primary-color);
+    padding: 5px;
+    list-style: decimal inside none;
+    border: solid;
 }

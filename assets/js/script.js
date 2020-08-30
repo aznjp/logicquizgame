@@ -37,14 +37,17 @@ var endGameEl = document.getElementById('end-page')
 var displayEl = document.getElementById('display')
 var displayEl2 = document.getElementById('display2')
 
-
+var viewHighscoreEl = document.getElementById("highscore")
+var scoreEl = document.getElementById('score')
+var IDEl = document.getElementById('playerID')
+var registerEl = document.getElementById('register')
+var registryEl = document.getElementById('new-container')
 
 //Puts the first value of the question array position as 0
 let questionCounter = 0;
 //Adjusts the timer based on the actual number of questions in the array
 let timeLeft = questions.length * 15;
 var timerInterval;
-
 
 /* These constants are used to link each individual answer to each individual button div 
 they will eventualy be filled by the createQuestionElement function down below and links them to the positions in the array*/
@@ -71,6 +74,7 @@ function startGame() {
     createQuestionElement();
 }
 
+
 function createQuestionElement() {
 
     var currentQuestion = questions[questionCounter]
@@ -81,7 +85,6 @@ function createQuestionElement() {
     answer3.textContent = currentQuestion.answers[2]
     answer4.textContent = currentQuestion.answers[3]
 }
-
 
 function checkAnswer() {
     /* Variables were added to link both the correct answer from the array and the event (the click to each button box) 
@@ -127,6 +130,7 @@ function checkAnswer() {
 
 }
 
+
 function endGame() {
     // To prevent any negative time values (i.e. negative score values) this was put into place to automatically make them into the value 0
     if (timeLeft < 0) {
@@ -136,6 +140,14 @@ function endGame() {
     clearInterval(timerInterval);
 
 
+    //These were put to remove the final questions response (correct or wrong) slowly to still give a final answer but not consistently
+    setTimeout(function() {
+        displayEl.setAttribute("class", "hide");
+    }, 2000);
+    setTimeout(function() {
+        displayEl2.setAttribute("class", "hide");
+    }, 2000);
+
     // Question container div is now hidden and the endGame div is reveal thus revealing the final score and revealing input field to place initials
     questionContainerEl.setAttribute("class", "hide")
     endGameEl.removeAttribute("class")
@@ -144,6 +156,7 @@ function endGame() {
     timeclockEl.setAttribute("class", "hide")
     scoreEl.textContent = "Your final score is " + timeLeft;
 }
+
 
 // Timer countdown from the timeLeft variable stated at the top and if it reaches a value of zero or below then the timer will execute the endGame function listed above
 function countDown() {
@@ -158,6 +171,86 @@ function countDown() {
     }
 }
 
+function saveScore() {
+    // get actual value through the end-page div's input field
+    var ID = IDEl.value.trim()
+
+    // make sure value wasn't an invalid input
+    if (ID !== "") {
+        // pulls out the highscores inputed into local storage (NOTE: MAKING AN EMPTY ARRAY IS IMPORTANT SO THAT THE STRINGIFIED VALUES ARE PLACED INTO INDIVIDUAL NODES FOR DIFFERENT INPUTS)
+        var highscore =
+            JSON.parse(window.localStorage.getItem("newScores")) || [];
+
+        // new variable made to order the score and the initials of the players ID for input
+        var newTime = {
+            score: timeLeft,
+            initials: ID,
+        };
+
+        // The new variable plugs in the new values (score, initials) and then pushes them into the new Item (i.e. newScores) for local storage which can be read in Dev Tools
+        highscore.push(newTime);
+        localStorage.setItem("newScores", JSON.stringify(highscore));
+    }
+    printHighscores();
+}
+
+function printHighscores() {
+    /* These were added just to prevent these divs from showing up in the occurence that they finish typing their initials 
+    super fast and they have a lag time of popping above the high scores*/
+    displayEl2.setAttribute("class", "hide");
+    displayEl.setAttribute("class", "hide");
+
+    // The new container div which holds the score list div is revealed while hiding the end-page div and the highscore button at the top right
+    registryEl.removeAttribute("class")
+    viewHighscoreEl.setAttribute("class", "hide")
+    endGameEl.setAttribute("class", "hide")
+
+    // either get scores from localstorage or set to empty array
+    var highscore = JSON.parse(window.localStorage.getItem("newScores")) || [];
+    showScores(highscore);
+}
+
+function clearHighscores() {
+    // the clear button can remove the newScore array in local storage and then set a new empty array via the showScores function
+    localStorage.removeItem("newScores");
+    showScores([]);
+}
+
+
+function showScores(highscore) {
+    // The ordered list element will get filled with the scores from the newScores array in local storage via empty string in the order of the functions below it
+    var olEl = document.getElementById("newScores");
+    olEl.textContent = "";
+
+    // Uses a sort function to place higher scores on top by comparing each score before being plugged into the forEach function
+    highscore.sort(function(a, b) {
+        return b.score - a.score;
+    });
+
+    highscore.forEach(function(score) {
+        // Will make each indiviual input for scores be placed in as initials and scores
+        var liTag = document.createElement("li");
+        liTag.textContent = score.initials + " " + score.score;
+
+        // Will plug in the list elements into the ordered list element in html via newScores id
+        olEl.appendChild(liTag);
+    });
+
+}
+
+function viewHighscore() {
+    // This allows all other elements to be erased and the view highscore button to have the functionality of going back and forth between the quiz and highscores
+    document.querySelector(".container").setAttribute("class", "hide");
+    document.querySelector(".controls").setAttribute("class", "hide");
+    viewHighscoreEl.setAttribute("class", "hide");
+    timeclockEl.setAttribute("class", "hide");
+
+    // This will once again retrieve the items from the newScores array in the local storage and fill them in via the showScores function
+    var highscore = JSON.parse(window.localStorage.getItem("newScores")) || [];
+    showScores(highscore);
+
+    document.querySelector("#new-container").removeAttribute("class")
+}
 
 //This is to add the click event listener to the start button at the beginning of the quiz thus triggering the start function
 startButton.addEventListener('click', startGame)
@@ -168,3 +261,12 @@ answer1.addEventListener("click", checkAnswer)
 answer2.addEventListener("click", checkAnswer)
 answer3.addEventListener("click", checkAnswer)
 answer4.addEventListener("click", checkAnswer)
+
+//This is to add the click event listener to the clear button at the in the new container div and removes the scores in local storage using clear high score function above
+document.getElementById("clear").onclick = clearHighscores;
+
+//This is to add the click event listener to the submit button at the end of the quiz thus triggering the saveScore function thus allow you to put your score into a local storage base
+registerEl.onclick = saveScore;
+
+//This is to add the click event listener to the view highscore button at the top left of the screen thus opening up the div for the scores and showing all the previous high scores
+viewHighscoreEl.addEventListener('click', viewHighscore)
