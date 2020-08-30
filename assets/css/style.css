@@ -12,6 +12,15 @@
     --Secondary-color: rgb(13, 0, 128);
 }
 
+.Title {
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.font-increase {
+    font-size: 30px;
+}
+
 
 /* This was implemented to have a div for the timer block and the view highscore block within the header div 
 thus giving a clean easy look to see their highscores and to watch the timer */
@@ -42,27 +51,41 @@ header {
 /* This is for the welcome page div to give it a nice clean look as they enter the application */
 
 .welcome-page {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
     text-align: center;
-    justify-content: center;
     margin-bottom: 15px;
 }
 
-.welcome {
-    margin-bottom: 10px;
-    text-align: center;
-    width: 100%;
-}
-
 .container {
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+}
+
+
+/* This is for the end page div to give it a nice clean look 
+as they enter their final scores */
+
+#end-page {
+    text-align: center;
+    white-space: pre-line;
+    font-size: 1.5rem;
+    width: 60%;
+}
+
+#score {
+    color: red;
+}
+
+#playerID {
+    width: 50%;
+    height: 30px;
+}
+
+#register {
+    font-size: 1.5rem;
+    margin-top: 20px;
 }
 
 
@@ -71,11 +94,6 @@ header {
 #question {
     margin-bottom: 15px;
     font-size: 24px;
-}
-
-.buttons {
-    justify-content: center;
-    align-items: center;
 }
 
 .btn {
@@ -100,6 +118,14 @@ header {
 .next-btn {
     font-size: 1rem;
     padding: 10px 20px;
+}
+
+.big-button {
+    font-size: 1.5rem;
+}
+
+.bbutton-container {
+    margin: 20px;
 }
 
 .start-btn:hover,
@@ -156,7 +182,7 @@ ol {
     background-color: var(--Background-color);
     width: 300px;
     padding-left: 0px;
-    max-height: 600px;
+    max-height: 425px;
     overflow: auto;
 }
 
@@ -165,4 +191,5 @@ li {
     padding: 5px;
     list-style: decimal inside none;
     border: solid;
+    font-size: 24px;
 }

@@ -154,7 +154,7 @@ function endGame() {
 
     //Hide the timer at the top right
     timeclockEl.setAttribute("class", "hide")
-    scoreEl.textContent = "Your final score is " + timeLeft;
+    scoreEl.textContent = timeLeft;
 }
 
 
