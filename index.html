@@ -24,6 +24,7 @@
 
     <div class="container">
         <div id="welcome-page" class="welcome-page">
+
             <h1 class="welcome">The Javascript Coding Script</h1>
             <p>
                 Once you press the start button the quiz will begin
@@ -34,6 +35,21 @@
                 </br>
                 Good luck and have fun!
             </p>
+
+            <div id="end-page" class="end hide">
+                <h2>
+                    All Done!
+                </h2>
+
+                <p id="score"></p>
+
+                <p>
+                    Enter Initials:
+                    <input type="text" placeholder="Your initials" id="playerID" />
+
+                    <button id="register"> Submit </button>
+                </p>
+            </div>
 
             <div id="question-container" class="hide">
                 <div id="question">
@@ -48,6 +64,9 @@
                 </div>
             </div>
 
+            <div id="display" class="correct hide"></div>
+            <div id="display2" class="incorrect hide"></div>
+
         </div>
     </div>
 
@@ -55,7 +74,6 @@
         <button id="start-btn" class="start-btn" type="submit">Start Quiz</button>
     </div>
 
-    </div>
     <script src="assets/js/script.js"></script>
 </body>
 

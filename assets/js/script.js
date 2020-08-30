@@ -34,6 +34,8 @@ var startButton = document.getElementById('start-btn')
 var questionContainerEl = document.getElementById('question-container')
 var welcomePageEl = document.getElementById('welcome-page')
 var endGameEl = document.getElementById('end-page')
+var displayEl = document.getElementById('display')
+var displayEl2 = document.getElementById('display2')
 
 
 
@@ -42,6 +44,16 @@ let questionCounter = 0;
 //Adjusts the timer based on the actual number of questions in the array
 let timeLeft = questions.length * 15;
 var timerInterval;
+
+
+/* These constants are used to link each individual answer to each individual button div 
+they will eventualy be filled by the createQuestionElement function down below and links them to the positions in the array*/
+const answer1 = document.getElementById("btn1");
+const answer2 = document.getElementById("btn2");
+const answer3 = document.getElementById("btn3");
+const answer4 = document.getElementById("btn4");
+
+
 
 function startGame() {
     // The start button elements and the inital paragraph that will introduce you to the game is put to display none
@@ -59,7 +71,61 @@ function startGame() {
     createQuestionElement();
 }
 
+function createQuestionElement() {
 
+    var currentQuestion = questions[questionCounter]
+    question.textContent = currentQuestion.question;
+
+    answer1.textContent = currentQuestion.answers[0]
+    answer2.textContent = currentQuestion.answers[1]
+    answer3.textContent = currentQuestion.answers[2]
+    answer4.textContent = currentQuestion.answers[3]
+}
+
+
+function checkAnswer() {
+    /* Variables were added to link both the correct answer from the array and the event (the click to each button box) 
+    so that it will trigger the if-else statement down below thus indicating whether the answer was correct or not */
+    var correctAnswer = questions[questionCounter].correctAnswer
+    var currentAnswer = event.target.textContent
+
+    // These were used to remove hide class thus showing both boxes quickly before they are hidden again
+    displayEl.classList.remove('hide')
+    displayEl2.classList.remove('hide')
+
+    /* if the question was correct then the opposite revealed box is removed (i.e if it was wrong then the correct box is hidden and 
+    the correct div is filled with new text-content and vice versa)*/
+    if (currentAnswer === correctAnswer) {
+        displayEl2.classList.add('hide')
+        displayEl.textContent = "-----------Correct!-----------"
+    } else {
+        displayEl.classList.add('hide')
+        displayEl2.textContent = "-----------Wrong!-----------"
+
+        // The timeLeft let variable is then reduced by 15 seconds once it is considered wrong
+        timeLeft -= 15;
+    }
+
+    //This adds the next position into the array as it is iterating through it and thus filling in new questions and answers into the question container
+    questionCounter++;
+
+
+    // Console.log was added to check how the timeLeft was removing time when they gave an incorrect answer
+    console.log(timeLeft)
+
+    // This console log is to check which index number the questionCounter is at during each iteration of the questions and answers
+    console.log(questionCounter)
+
+    /* This if-else statement was added to apply the endGame function in the occurence that 
+    there are no more questions left in the array OR if the timeLeft variable is less than or equal to 0
+    otherwise the function would be stuck at the last question*/
+    if (questionCounter === questions.length || timeLeft <= 0) {
+        endGame();
+    } else {
+        createQuestionElement();
+    }
+
+}
 
 function endGame() {
     // To prevent any negative time values (i.e. negative score values) this was put into place to automatically make them into the value 0
@@ -95,3 +161,10 @@ function countDown() {
 
 //This is to add the click event listener to the start button at the beginning of the quiz thus triggering the start function
 startButton.addEventListener('click', startGame)
+
+/*This is to add the click event listener to the each of the individual slots we put into the index html file which will then trigger the function to check the answer 
+and explain whether the answer was correct or not and if incorrect the time will be reduced by 1000 seconds*/
+answer1.addEventListener("click", checkAnswer)
+answer2.addEventListener("click", checkAnswer)
+answer3.addEventListener("click", checkAnswer)
+answer4.addEventListener("click", checkAnswer)

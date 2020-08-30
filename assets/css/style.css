@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Long+Cang&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -80,6 +82,11 @@ were added so that they can be centered and evenly added in */
 /* The controls box is placed at the bottom to hold the start button 
 and possibly any other buttons for the future */
 
+#question {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
 .controls {
     display: flex;
     justify-content: center;
@@ -97,7 +104,8 @@ and possibly any other buttons for the future */
 }
 
 .start-btn:hover,
-.btn:hover {
+.btn:hover,
+#highscore:hover {
     background-color: var(--Secondary-color);
     color: var(--Primary-color);
 }
@@ -107,4 +115,31 @@ and possibly any other buttons for the future */
 
 .hide {
     display: none;
+}
+
+
+/* These were added into update the colors of the correct and wrong divs */
+
+.correct {
+    width: 100%;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    border-top: 3px solid gray;
+    border-bottom: 3px solid gray;
+    background-color: green;
+    font-family: 'Great Vibes', cursive;
+}
+
+.incorrect {
+    width: 100%;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    border-top: 3px solid gray;
+    border-bottom: 3px solid gray;
+    background-color: red;
+    font-family: 'Long Cang', cursive;
 }
