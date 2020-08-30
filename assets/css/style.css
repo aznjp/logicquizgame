@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --Background-color: #008080;
+    --Primary-color: #ffffff;
+    --Secondary-color: rgb(13, 0, 128);
+}
+
+
+/* The portions of the header were styled to incorperate the timer 
+and high score block at the top of the page */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10px 100px 0;
+}
+
+#timeclock {
+    top: 30px;
+    right: 30px;
+    position: absolute;
+}
+
+#highscore {
+    top: 30px;
+    left: 30px;
+    position: absolute;
+    background-color: var(--Background-color);
+    color: var(--Primary-color)
+}
+
+
+/* These are used to stylize and position all the buttons for the quiz */
+
+.buttons {
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    width: 100%;
+    background-color: var(--Background-color);
+    color: var(--Primary-color);
+    padding: 10px;
+    margin: 5px 0 5px 0;
+}
+
+
+/* The controls box is placed at the bottom to hold the start button 
+and possibly any other buttons for the future */
+
+.controls {
+    display: flex;
+    justify-content: center;
+}
+
+.start-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.start-btn:hover {
+    background-color: var(--Secondary-color);
+    color: var(--Primary-color);
+}
