@@ -35,6 +35,32 @@ header {
 }
 
 
+/* New stylings for the containers for all of the welcoming page and the ending page
+were added so that they can be centered and evenly added in */
+
+.welcome-page {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.welcome {
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+
 /* These are used to stylize and position all the buttons for the quiz */
 
 .buttons {
@@ -65,7 +91,20 @@ and possibly any other buttons for the future */
     padding: 10px 20px;
 }
 
-.start-btn:hover {
+.next-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.start-btn:hover,
+.btn:hover {
     background-color: var(--Secondary-color);
     color: var(--Primary-color);
+}
+
+
+/* This wil be consistently used to help hide divs and manipulate them via DOM elements */
+
+.hide {
+    display: none;
 }
